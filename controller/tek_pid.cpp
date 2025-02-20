@@ -11,20 +11,34 @@
 
 __Tek_Namespace_Ctrl_Start;
 
-class PID_Unit
+class ControllerBase
 {
-private:
-    /* data */
+protected:
+    float target;
+
 public:
-    PID_Unit(/* args */);
-    ~PID_Unit();
+    ControllerBase();
+    ~ControllerBase();
 };
 
-PID_Unit::PID_Unit(/* args */)
+ControllerBase::ControllerBase()
 {
 }
 
-PID_Unit::~PID_Unit()
+ControllerBase::~ControllerBase()
+{
+}
+
+class PID_Unit
+{
+private:
+    float kp, ki, kd;
+
+public:
+    PID_Unit(/* args */);
+};
+
+PID_Unit::PID_Unit(/* args */)
 {
 }
 

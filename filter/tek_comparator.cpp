@@ -12,24 +12,63 @@
 
 __Tek_Namespace_Filter_Start;
 
-class ZeroCrossingComparator
+class ComparatorBase
 {
-private:
-    /* data */
+protected:
+    bool state = false;
+
 public:
-    ZeroCrossingComparator();
+    virtual void update(float dat) const = 0;
+    inline bool get_result() { return state; };
 };
 
-class HysteresisComparator
+class ZeroCrossingComparator : public ComparatorBase
 {
-private:
+    private:
+    const float threshold;
+
 public:
-    HysteresisComparator();
-    ~HysteresisComparator();
+    ZeroCrossingComparator(const float t);
+    virtual void update(float dat);
 };
 
-HysteresisComparator::HysteresisComparator(/* args */)
+class HysteresisComparator : public ComparatorBase
 {
+    private:
+    const float thresholdHigh;
+    const float thresholdLow;
+
+    public:
+    HysteresisComparator(const float h, const float l);
+    virtual void update(float dat);
+};
+
+ZeroCrossingComparator::ZeroCrossingComparator(const float t):threshold(t)
+{
+}
+
+void ZeroCrossingComparator::update(float dat)
+{
+    this->state = (dat > this->threshold);
+}
+
+HysteresisComparator::HysteresisComparator(const float h, const float l)
+    : thresholdHigh(h), thresholdLow(l)
+{
+}
+
+void HysteresisComparator::update(float dat)
+{
+    if (this->state) // activated
+    {
+        if (dat < this->thresholdLow)
+            this->state = false;
+    }
+    else
+    {
+        if (dat > this->thresholdHigh)
+            this->state = true;
+    }
 }
 
 __Tek_Namespace_Filter_End;
