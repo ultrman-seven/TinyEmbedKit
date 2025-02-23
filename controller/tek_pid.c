@@ -3,6 +3,13 @@
 
 float tek_pidInit(tek_pidCore *core) { memset(core, 0, sizeof(tek_pidCore)); }
 
+void tek_pidSetParam(tek_pidCore *core, float p, float i, float d)
+{
+    core->kp = p;
+    core->ki = i;
+    core->kd = d;
+}
+
 float tek_pidUpdate(tek_pidCore *core, float inputVal)
 {
     float err;

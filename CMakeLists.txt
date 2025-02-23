@@ -12,12 +12,15 @@ target_include_directories(tek INTERFACE
     # ./adt
     # ./filter
     # ./controller
+    ./
     )
 
-    target_sources(tek INTERFACE
-    ./adt/*.c
-    ./filter/*.c
-    ./controller/*.c
+file(GLOB_RECURSE tek_C_SOURCES "./**/*.c")
+target_sources(tek INTERFACE
+    ${tek_C_SOURCES}
+    # ./adt/*.c
+    # ./filter/*.c
+    # ./controller/*.c
 )
 
 target_link_directories(tek INTERFACE
