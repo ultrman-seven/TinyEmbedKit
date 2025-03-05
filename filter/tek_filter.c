@@ -13,7 +13,7 @@ void tek_averageFilterInit(tek_averageFilterCore *core, void *buf, uint32_t bufS
 {
     tek_FifoInit(&core->fifo, buf, bufSize, sizeof(float));
     core->__sum = 0;
-    core->len = (core->fifo.bufLen) / (sizeof(float));
+    core->len = (core->fifo.__arr.__buffSize) / (sizeof(float));
     core->result = 0;
 }
 

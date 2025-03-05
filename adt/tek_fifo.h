@@ -1,6 +1,7 @@
 #ifndef C6A84A49_E425_4F5C_ABF5_A5DB6092F327
 #define C6A84A49_E425_4F5C_ABF5_A5DB6092F327
 #include <stdint.h>
+#include "tek_array.h"
 
 #ifdef __cplusplus
 extern "C"
@@ -9,10 +10,11 @@ extern "C"
 
 typedef struct
 {
-    void *buffer;
+    // void *buffer;
+    // uint32_t bufLen;
+    // uint8_t elementSize;
+    tek_ArrayCore __arr;
     uint32_t idxFront;
-    uint32_t bufLen;
-    uint8_t elementSize;
     uint32_t dataLen;
 } tek_FifoCore;
 
