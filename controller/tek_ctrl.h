@@ -18,7 +18,7 @@ struct __tek_pidCore
     float __intVal;
 };
 
-float tek_pidInit(tek_pidCore *core);
+void tek_pidInit(tek_pidCore *core);
 void tek_pidSetParam(tek_pidCore *core, float p, float i, float d);
 float tek_pidUpdate(tek_pidCore *core, float inputVal);
 

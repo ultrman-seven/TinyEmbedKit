@@ -24,6 +24,7 @@ void tek_FifoTop(tek_FifoCore *fifo, void *data);
 void tek_FifoPop(tek_FifoCore *fifo);
 void tek_FifoGet(tek_FifoCore *fifo, void *data);
 uint32_t tek_FifoGetDataLength(tek_FifoCore *fifo);
+void tek_FifoGetBytes(tek_FifoCore *fifo, void *data, uint8_t len);
 
 #ifdef __cplusplus
 }

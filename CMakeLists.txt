@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(tek)
+project(TinyEmbedKit)
 add_library(tek INTERFACE)
 
 enable_language(C)

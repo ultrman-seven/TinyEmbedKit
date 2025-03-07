@@ -1,7 +1,7 @@
 #include "controller/tek_ctrl.h"
 #include "string.h"
 
-float tek_pidInit(tek_pidCore *core) { memset(core, 0, sizeof(tek_pidCore)); }
+void tek_pidInit(tek_pidCore *core) { memset(core, 0, sizeof(tek_pidCore)); }
 
 void tek_pidSetParam(tek_pidCore *core, float p, float i, float d)
 {

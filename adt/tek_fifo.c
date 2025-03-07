@@ -48,6 +48,17 @@ void tek_FifoTop(tek_FifoCore *fifo, void *data)
     memcpy(data, (char *)fifo->__arr.__buff + (fifo->idxFront), fifo->__arr.__elementSize);
 }
 
+void tek_FifoGetBytes(tek_FifoCore *fifo, void *data, uint8_t len)
+{
+    uint8_t *dptr = data;
+    while (len--)
+    {
+        tek_FifoTop(fifo, dptr);
+        tek_FifoPop(fifo);
+        dptr += fifo->__arr.__elementSize;
+    }
+}
+
 void tek_FifoGet(tek_FifoCore *fifo, void *data)
 {
     tek_FifoTop(fifo, data);
