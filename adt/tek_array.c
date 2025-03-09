@@ -11,7 +11,7 @@ void tek_ArrayInit(tek_ArrayCore *core, void *buf, uint16_t bufLen, uint16_t ele
 
 static inline uint16_t __tek_ArrayIdxGen2Legal(tek_ArrayCore *core, int16_t idx)
 {
-    uint32_t maxIdx = core->__buffSize / core->__elementSize;
+    uint16_t maxIdx = core->__buffSize / core->__elementSize;
     while (idx < 0)
         idx += maxIdx;
     while (idx >= maxIdx)

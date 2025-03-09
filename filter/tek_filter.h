@@ -51,6 +51,8 @@ void tek_highpassFilterUpdate(tek_highpassFilterCore *core, float d);
 
 void tek_averageFilterInit(tek_averageFilterCore *core, void *buf, uint32_t bufSize);
 void tek_averageFilterUpdate(tek_averageFilterCore *core, float data);
+float tek_averageFilterGetResult(tek_averageFilterCore *core);
+void tek_averageFilterUpdate_WithoutResult(tek_averageFilterCore *core, float data);
 
 void tek_ZeroCrossingComparatorInit(tek_ZeroCrossingComparatorCore *core, float threshold);
 void tek_ZeroCrossingComparatorUpdate(tek_ZeroCrossingComparatorCore *core, float dat);

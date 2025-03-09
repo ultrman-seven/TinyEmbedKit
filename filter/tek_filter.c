@@ -17,13 +17,28 @@ void tek_averageFilterInit(tek_averageFilterCore *core, void *buf, uint32_t bufS
     core->result = 0;
 }
 
+void tek_averageFilterUpdate_WithoutResult(tek_averageFilterCore *core, float data)
+{
+    float tmp;
+    core->__sum += data;
+    if (tek_FifoGetDataLength(&core->fifo) >= core->len)
+    {
+        tek_FifoGet(&core->fifo, &tmp);
+        core->__sum -= tmp;
+    }
+    tmp = data;
+    tek_FifoPush(&core->fifo, &tmp);
+}
+
+float tek_averageFilterGetResult(tek_averageFilterCore *core) { return core->__sum / core->len; }
+
 void tek_averageFilterUpdate(tek_averageFilterCore *core, float data)
 {
     float tmp;
     core->__sum += data;
-    if(tek_FifoGetDataLength(&core->fifo) >= core->len)
+    if (tek_FifoGetDataLength(&core->fifo) >= core->len)
     {
-        tek_FifoGet(&core->fifo,&tmp);
+        tek_FifoGet(&core->fifo, &tmp);
         core->__sum -= tmp;
     }
     tmp = data;

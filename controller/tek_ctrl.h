@@ -20,7 +20,7 @@ struct __tek_pidCore
 
 void tek_pidInit(tek_pidCore *core);
 void tek_pidSetParam(tek_pidCore *core, float p, float i, float d);
-float tek_pidUpdate(tek_pidCore *core, float inputVal);
+float tek_pidUpdate(tek_pidCore *core, float inputVal, float dt);
 
 #ifdef __cplusplus
 }

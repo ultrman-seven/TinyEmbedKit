@@ -10,7 +10,7 @@ void tek_pidSetParam(tek_pidCore *core, float p, float i, float d)
     core->kd = d;
 }
 
-float tek_pidUpdate(tek_pidCore *core, float inputVal)
+float tek_pidUpdate(tek_pidCore *core, float inputVal, float dt)
 {
     float err;
     float diff;
@@ -30,5 +30,5 @@ float tek_pidUpdate(tek_pidCore *core, float inputVal)
     }
     if (core->decayFactor > 0)
         core->__intVal *= core->decayFactor;
-    return (core->kp * err) + (core->ki * core->__intVal) + (core->kd * diff);
+    return (core->kp * err) + (core->ki * core->__intVal * dt) + (core->kd * diff / dt);
 }
