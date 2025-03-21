@@ -3,14 +3,15 @@
 
 void tek_pidInit(tek_pidCore *core) { memset(core, 0, sizeof(tek_pidCore)); }
 
-void tek_pidSetParam(tek_pidCore *core, float p, float i, float d)
+void tek_pidSetParam(tek_pidCore *core, float p, float i, float d, float dt)
 {
     core->kp = p;
     core->ki = i;
     core->kd = d;
+    core->ctrlPeriod = dt;
 }
 
-float tek_pidUpdate(tek_pidCore *core, float inputVal, float dt)
+float tek_pidUpdate(tek_pidCore *core, float inputVal)
 {
     float err;
     float diff;
@@ -30,5 +31,5 @@ float tek_pidUpdate(tek_pidCore *core, float inputVal, float dt)
     }
     if (core->decayFactor > 0)
         core->__intVal *= core->decayFactor;
-    return (core->kp * err) + (core->ki * core->__intVal * dt) + (core->kd * diff / dt);
+    return (core->kp * err) + (core->ki * core->__intVal * core->ctrlPeriod) + (core->kd * diff / core->ctrlPeriod);
 }

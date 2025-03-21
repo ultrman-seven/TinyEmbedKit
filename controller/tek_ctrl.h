@@ -6,21 +6,22 @@ extern "C"
 {
 #endif
 
-typedef struct __tek_pidCore tek_pidCore;
+    typedef struct __tek_pidCore tek_pidCore;
 
-struct __tek_pidCore
-{
-    float kp, ki, kd;
-    float target;
-    float intLimit;
-    float decayFactor;
-    float __err_last;
-    float __intVal;
-};
+    struct __tek_pidCore
+    {
+        float kp, ki, kd;
+        float ctrlPeriod;
+        float target;
+        float intLimit;
+        float decayFactor;
+        float __err_last;
+        float __intVal;
+    };
 
-void tek_pidInit(tek_pidCore *core);
-void tek_pidSetParam(tek_pidCore *core, float p, float i, float d);
-float tek_pidUpdate(tek_pidCore *core, float inputVal, float dt);
+    void tek_pidInit(tek_pidCore *core);
+    void tek_pidSetParam(tek_pidCore *core, float p, float i, float d, float dt);
+    float tek_pidUpdate(tek_pidCore *core, float inputVal);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,11 @@
 #include "adt/tek_fifo.h"
 #include "string.h"
 
+/// @brief 初始化FIFO
+/// @param fifo
+/// @param buffer
+/// @param bufSize
+/// @param elementSize
 void tek_FifoInit(tek_FifoCore *fifo, void *buffer, uint32_t bufSize, uint32_t elementSize)
 {
     tek_ArrayInit(&fifo->__arr, buffer, bufSize, elementSize);
@@ -8,11 +13,17 @@ void tek_FifoInit(tek_FifoCore *fifo, void *buffer, uint32_t bufSize, uint32_t e
     fifo->dataLen = 0;
 }
 
+/// @brief 获取FIFO中的数据长度
+/// @param fifo
+/// @return
 uint32_t tek_FifoGetDataLength(tek_FifoCore *fifo)
 {
     return fifo->dataLen;
 }
 
+/// @brief 将数据压入FIFO
+/// @param fifo
+/// @param data
 void tek_FifoPush(tek_FifoCore *fifo, void *data)
 {
     uint32_t offset;
@@ -29,6 +40,8 @@ void tek_FifoPush(tek_FifoCore *fifo, void *data)
         tek_FifoPop(fifo);
 }
 
+/// @brief 弹出FIFO中的数据
+/// @param fifo
 void tek_FifoPop(tek_FifoCore *fifo)
 {
     if (fifo->dataLen == 0)
@@ -40,6 +53,9 @@ void tek_FifoPop(tek_FifoCore *fifo)
         fifo->idxFront = 0;
 }
 
+/// @brief 获取FIFO中的数据
+/// @param fifo
+/// @param data
 void tek_FifoTop(tek_FifoCore *fifo, void *data)
 {
     if (fifo->dataLen == 0)
@@ -48,6 +64,10 @@ void tek_FifoTop(tek_FifoCore *fifo, void *data)
     memcpy(data, (char *)fifo->__arr.__buff + (fifo->idxFront), fifo->__arr.__elementSize);
 }
 
+/// @brief 获取FIFO中的数据
+/// @param fifo
+/// @param data
+/// @param len
 void tek_FifoGetBytes(tek_FifoCore *fifo, void *data, uint8_t len)
 {
     uint8_t *dptr = data;
